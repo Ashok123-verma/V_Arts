@@ -23,7 +23,7 @@
     max-height: 90vh; /* Limit height to 90% of the viewport height */
     width: auto; /* Maintain aspect ratio */
     height: auto; /* Maintain aspect ratio */
-    border: 2px solid white;
+    /* border: 2px solid white; */
     border-radius: 10px;
   }
   
