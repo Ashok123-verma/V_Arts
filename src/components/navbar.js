@@ -1,42 +1,59 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import "../styles/navbar.css";
 
 function Navbar({ authenticated, toggleTheme, handleLogout }) {
+  const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   const logout = (e) => {
-    e.preventDefault(); // Prevent default link behavior
-    handleLogout(); // Call the logout function passed as a prop
-    navigate("/login"); // Redirect to the login page
+    e.preventDefault();
+    handleLogout();
+    navigate("/login");
+  };
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen); // Toggle menu visibility
+  };
+
+  const closeMenu = () => {
+    setMenuOpen(false); // Close menu on link click
   };
 
   return (
     <nav className="navbar">
-      <ul className="navbar-menu">
+      <div className="navbar-header">
+        <div className="logo">Gallery</div>
+        <button className="hamburger" onClick={toggleMenu} aria-label="Toggle Menu">
+          <span className={`bar ${menuOpen ? "open" : ""}`}></span>
+          <span className={`bar ${menuOpen ? "open" : ""}`}></span>
+          <span className={`bar ${menuOpen ? "open" : ""}`}></span>
+        </button>
+      </div>
+      <ul className={`navbar-menu ${menuOpen ? "show" : ""}`}>
         <li>
-          <NavLink to="/gallery" activeClassName="active-link">
+          <NavLink to="/gallery" activeClassName="active-link" onClick={closeMenu}>
             Home
           </NavLink>
         </li>
         <li>
-          <NavLink to="/about" activeClassName="active-link">
+          <NavLink to="/about" activeClassName="active-link" onClick={closeMenu}>
             About
           </NavLink>
         </li>
         <li>
-          <NavLink to="/contact" activeClassName="active-link">
+          <NavLink to="/contact" activeClassName="active-link" onClick={closeMenu}>
             Contact
           </NavLink>
         </li>
-        <li className="right1">
+        <li>
           <button className="theme-toggle" onClick={toggleTheme}>
             Toggle Theme
           </button>
         </li>
         {authenticated && (
-          <li className="right">
-            <a href="/login" onClick={logout}>
+          <li>
+            <a href="/login" onClick={(e) => { logout(e); closeMenu(); }}>
               Logout
             </a>
           </li>

@@ -9,7 +9,7 @@ import "./styles/gallery.css";
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
-  const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState("dark");
 
   // Check for authentication status in localStorage
   useEffect(() => {
