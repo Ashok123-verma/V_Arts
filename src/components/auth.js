@@ -18,22 +18,50 @@ function Auth({ setAuthenticated }) {
   };
 
   return (
-    <div className="auth-container">
-      <h2>Login</h2>
-      <input
-        type="text"
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button onClick={login}>Login</button>
-    </div>
+    <section>
+      {/* Animation spans */}
+      {Array.from({ length: 200 }).map((_, i) => (
+        <span key={i}></span>
+      ))}
+
+      {/* Login form */}
+      <div className="signin">
+        <div className="content">
+          <h2>Sign In</h2>
+          <div className="form">
+            <div className="inputBox">
+              <input
+                type="text"
+                required
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+              />
+              <i>Username</i>
+            </div>
+            <div className="inputBox">
+              <input
+                type="password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <i>Password</i>
+            </div>
+            <div className="links">
+              <a href="#">Forgot Password</a>
+              <a href="#">Signup</a>
+            </div>
+            <div className="inputBox">
+              <input
+                type="submit"
+                value="Login"
+                onClick={login}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
 
