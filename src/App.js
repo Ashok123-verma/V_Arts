@@ -2,19 +2,26 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Auth from "./components/auth";
 import Gallery from "./components/gallery";
+import About from "./components/about"; // Import About component
+import Contact from "./components/contact"; // Import Contact component
 import Navbar from "./components/navbar";
 import "./styles/global.css";
 import "./styles/auth.css";
 import "./styles/gallery.css";
+import "./styles/about.css";
+import "./styles/contact.css";
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
   const [theme, setTheme] = useState("dark");
 
-  // Check for authentication status in localStorage
+  // Check authentication on initial render
   useEffect(() => {
-    if (localStorage.getItem("authenticated")) {
+    const authStatus = localStorage.getItem("authenticated");
+    if (authStatus === "true") {
       setAuthenticated(true);
+    } else {
+      setAuthenticated(false);
     }
   }, []);
 
@@ -41,16 +48,40 @@ function App() {
           <Route
             path="/login"
             element={
-              authenticated ? <Navigate to="/gallery" /> : <Auth setAuthenticated={setAuthenticated} />
+              authenticated ? (
+                <Navigate to="/gallery" replace />
+              ) : (
+                <Auth setAuthenticated={setAuthenticated} />
+              )
             }
           />
           <Route
             path="/gallery"
-            element={authenticated ? <Gallery /> : <Navigate to="/login" />}
+            element={
+              authenticated ? <Gallery /> : <Navigate to="/login" replace />
+            }
+          />
+          <Route
+            path="/about"
+            element={
+              authenticated ? <About /> : <Navigate to="/login" replace />
+            }
+          />
+          <Route
+            path="/contact"
+            element={
+              authenticated ? <Contact /> : <Navigate to="/login" replace />
+            }
           />
           <Route
             path="/"
-            element={<Navigate to={authenticated ? "/gallery" : "/login"} />}
+            element={
+              authenticated ? (
+                <Navigate to="/gallery" replace />
+              ) : (
+                <Navigate to="/login" replace />
+              )
+            }
           />
         </Routes>
       </Router>

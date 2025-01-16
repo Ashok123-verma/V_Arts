@@ -43,7 +43,7 @@ function Navbar({ authenticated, toggleTheme, handleLogout }) {
         </li>
         <li>
           <NavLink to="/contact" activeClassName="active-link" onClick={closeMenu}>
-            Contact
+            Small
           </NavLink>
         </li>
         <li>
