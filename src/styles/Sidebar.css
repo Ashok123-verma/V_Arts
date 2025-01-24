@@ -126,3 +126,12 @@
 .content-area {
   transition: margin-left 0.3s ease;
 }
+
+
+.sidebar-header .header-logo img {
+  width: 150px; /* Adjust the size of the image */
+  height: 150px; /* Ensure the height is the same as the width for a perfect circle */
+  border-radius: 50%; /* Makes the image round */
+  object-fit: cover; /* Ensures the image covers the area without stretching */
+  margin-left: 10px; /* Optional: Adds some space from the left edge */
+}

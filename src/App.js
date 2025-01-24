@@ -7,6 +7,7 @@ import Contact from "./components/contact";
 import Navbar from "./components/navbar";
 import Sidebar from "./components/Sidebar";
 import "./styles/global.css";
+import Dashboard from "./components/Dashboard";
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
@@ -99,6 +100,7 @@ function App() {
               )
             }
           />
+          <Route path="/dashboard" element={<Dashboard/>} />
         </Routes>
       </Router>
     </div>

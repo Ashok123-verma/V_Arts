@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import '../styles/Sidebar.css';
 
 const Sidebar = () => {
@@ -26,7 +27,7 @@ const Sidebar = () => {
         {/* Sidebar Header */}
         <header className="sidebar-header">
           <a href="#" className="header-logo">
-            <img src="logo.png" alt="CodingNepal" />
+            <img src="/images/Icon.jpg" alt="CodingNepal" />
           </a>
           <button className="sidebar-toggler" onClick={toggleSidebar}>
             <span className="material-symbols-rounded">chevron_left</span>
@@ -37,10 +38,10 @@ const Sidebar = () => {
           <ul className="nav-list">
             {/* Dashboard */}
             <li className="nav-item">
-              <a href="#" className="nav-link">
+              <Link to="/dashboard" className="nav-link"> {/* Changed a href to Link */}
                 <span className="material-symbols-rounded">dashboard</span>
                 <span className="nav-label">Dashboard</span>
-              </a>
+              </Link>
             </li>
 
             {/* Dropdown 1 */}
@@ -55,9 +56,21 @@ const Sidebar = () => {
                 <span className="material-symbols-rounded">keyboard_arrow_down</span>
               </a>
               <ul className={`dropdown-menu ${openDropdown === 0 ? 'open' : ''}`}>
-                <li className="nav-item"><a className="nav-link">IT Consulting</a></li>
-                <li className="nav-item"><a className="nav-link">Cloud Solutions</a></li>
-                <li className="nav-item"><a className="nav-link">Mobile Apps</a></li>
+                <li className="nav-item">
+                  <Link to="/services/it-consulting" className="nav-link"> {/* Redirect to specific service */}
+                    IT Consulting
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/services/cloud-solutions" className="nav-link"> {/* Redirect to specific service */}
+                    Cloud Solutions
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/services/mobile-apps" className="nav-link"> {/* Redirect to specific service */}
+                    Mobile Apps
+                  </Link>
+                </li>
               </ul>
             </li>
 
@@ -73,34 +86,46 @@ const Sidebar = () => {
                 <span className="material-symbols-rounded">keyboard_arrow_down</span>
               </a>
               <ul className={`dropdown-menu ${openDropdown === 1 ? 'open' : ''}`}>
-                <li className="nav-item"><a className="nav-link">Saved Tutorials</a></li>
-                <li className="nav-item"><a className="nav-link">Favorite Blogs</a></li>
-                <li className="nav-item"><a className="nav-link">Resource Guides</a></li>
+                <li className="nav-item">
+                  <Link to="/bookmarks/saved-tutorials" className="nav-link"> {/* Redirect to saved tutorials */}
+                    Saved Tutorials
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/bookmarks/favorite-blogs" className="nav-link"> {/* Redirect to favorite blogs */}
+                    Favorite Blogs
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to="/bookmarks/resource-guides" className="nav-link"> {/* Redirect to resource guides */}
+                    Resource Guides
+                  </Link>
+                </li>
               </ul>
             </li>
 
             {/* Notifications */}
             <li className="nav-item">
-              <a href="#" className="nav-link">
+              <Link to="/notifications" className="nav-link"> {/* Redirect to notifications page */}
                 <span className="material-symbols-rounded">notifications</span>
                 <span className="nav-label">Notifications</span>
-              </a>
+              </Link>
             </li>
 
             {/* Settings */}
             <li className="nav-item">
-              <a href="#" className="nav-link">
+              <Link to="/settings" className="nav-link"> {/* Redirect to settings page */}
                 <span className="material-symbols-rounded">settings</span>
                 <span className="nav-label">Settings</span>
-              </a>
+              </Link>
             </li>
 
             {/* Sign Out */}
             <li className="nav-item">
-              <a href="#" className="nav-link">
+              <Link to="/login" className="nav-link"> {/* Redirect to login page */}
                 <span className="material-symbols-rounded">logout</span>
                 <span className="nav-label">Sign Out</span>
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>

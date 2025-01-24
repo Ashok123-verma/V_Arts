@@ -1,0 +1,81 @@
+.dashboard-container {
+  padding: 20px;
+  margin-top: 80px;
+}
+
+.dashboard-header {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+/* Use grid layout for the cards */
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Automatically adjust based on screen size */
+  gap: 20px;
+}
+
+.card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-body {
+  padding: 10px;
+  text-align: center;
+}
+
+.card-body img.card-image {
+  width: 100%; /* Ensure the image fits the card */
+  height: auto; /* Maintain aspect ratio */
+  object-fit: cover; /* Ensure the image covers the card area */
+  border-radius: 8px; /* Round the corners of the image */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.card-body img.card-image:hover {
+  transform: scale(1.05); /* Slight zoom effect on hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+}
+
+.card-body h3 {
+  font-size: 1.2rem;
+  margin: 10px 0;
+}
+
+.card-body p {
+  font-size: 1rem;
+  color: #555;
+}
+
+/* Responsive for mobile devices */
+@media screen and (max-width: 769px) {
+  .dashboard-header {
+    font-size: 1.5rem;
+  }
+
+  .cards-container {
+    margin-top: 40px; /* Adjust margin for smaller screens */
+  }
+
+  .card-body h3 {
+    font-size: 1rem;
+  }
+
+  .card-body p {
+    font-size: 0.9rem;
+  }
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+body {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(#f1f3ff, #cbd4ff);
+}
