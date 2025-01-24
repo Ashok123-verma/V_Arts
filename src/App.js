@@ -2,32 +2,32 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Auth from "./components/auth";
 import Gallery from "./components/gallery";
-import About from "./components/about"; // Import About component
-import Contact from "./components/contact"; // Import Contact component
+import About from "./components/about";
+import Contact from "./components/contact";
 import Navbar from "./components/navbar";
+import Sidebar from "./components/Sidebar";
 import "./styles/global.css";
-import "./styles/auth.css";
-import "./styles/gallery.css";
-import "./styles/about.css";
-import "./styles/contact.css";
 
 function App() {
   const [authenticated, setAuthenticated] = useState(false);
   const [theme, setTheme] = useState("dark");
 
-  // Check authentication on initial render
+  // Load theme and auth status on initial render
   useEffect(() => {
+    const savedTheme = localStorage.getItem("theme") || "dark";
+    setTheme(savedTheme);
+
     const authStatus = localStorage.getItem("authenticated");
-    if (authStatus === "true") {
-      setAuthenticated(true);
-    } else {
-      setAuthenticated(false);
-    }
+    setAuthenticated(authStatus === "true");
   }, []);
 
-  // Toggle between light and dark themes
+  // Toggle between themes and persist to localStorage
   const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+    setTheme((prevTheme) => {
+      const newTheme = prevTheme === "light" ? "dark" : "light";
+      localStorage.setItem("theme", newTheme);
+      return newTheme;
+    });
   };
 
   // Handle logout
@@ -36,14 +36,24 @@ function App() {
     setAuthenticated(false);
   };
 
+  // ProtectedRoute Component
+  const ProtectedRoute = ({ children }) => {
+    return authenticated ? children : <Navigate to="/login" replace />;
+  };
+
   return (
     <div className={theme}>
       <Router>
+        {/* Navbar is always visible */}
         <Navbar
           authenticated={authenticated}
           toggleTheme={toggleTheme}
           handleLogout={handleLogout}
         />
+
+        {/* Sidebar is visible only for logged-in users */}
+        {authenticated && <Sidebar />}
+
         <Routes>
           <Route
             path="/login"
@@ -58,19 +68,25 @@ function App() {
           <Route
             path="/gallery"
             element={
-              authenticated ? <Gallery /> : <Navigate to="/login" replace />
+              <ProtectedRoute>
+                <Gallery />
+              </ProtectedRoute>
             }
           />
           <Route
             path="/about"
             element={
-              authenticated ? <About /> : <Navigate to="/login" replace />
+              <ProtectedRoute>
+                <About />
+              </ProtectedRoute>
             }
           />
           <Route
             path="/contact"
             element={
-              authenticated ? <Contact /> : <Navigate to="/login" replace />
+              <ProtectedRoute>
+                <Contact />
+              </ProtectedRoute>
             }
           />
           <Route

@@ -24,3 +24,11 @@
       margin-top: 40px;
     }
   }
+
+  @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+body {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(#f1f3ff, #cbd4ff);
+}

@@ -1,0 +1,128 @@
+/* Sidebar container */
+.sidebar-container {
+  display: flex;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+/* Sidebar initially hidden */
+.sidebar-container.collapsed .sidebar {
+  width: 0;
+  visibility: hidden;
+  opacity: 0;
+  transition: width 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;  /* Fix the sidebar to the left */
+  top: 0;
+  left: 0;
+  width: 250px; /* Expanded sidebar width */
+  background-color: #2c3e50;
+  color: white;
+  height: 100vh;
+  padding-top: 20px;
+  z-index: 1000; /* Ensure it appears above content */
+  transition: all 0.3s ease;
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Sidebar Header */
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 15px;
+}
+
+.sidebar-toggler {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+}
+
+/* Sidebar Links */
+.nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-item {
+  padding: 10px 15px;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  color: white;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  background-color: #34495e;
+  cursor: pointer;
+}
+
+.nav-label {
+  margin-left: 10px;
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+  display: none;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.dropdown-menu.open {
+  display: block;
+  background-color: #34495e;
+}
+
+.dropdown-toggle {
+  display: flex;
+  align-items: center;
+}
+
+.material-symbols-rounded {
+  font-size: 24px;
+}
+
+/* Mobile Sidebar Button */
+.sidebar-menu-button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 30px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+}
+
+/* Collapsed Sidebar Menu Button */
+.sidebar-container.collapsed .sidebar-menu-button {
+  display: block;
+}
+
+/* Content Area Adjustment */
+.content-area {
+  transition: margin-left 0.3s ease;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+/* When sidebar is expanded, shift content */
+.sidebar-container:not(.collapsed) .content-area {
+  margin-left: 250px; /* Match sidebar width */
+  padding-left: 20px;
+}
+
+/* Optional: Add some transition effect to the content */
+.content-area {
+  transition: margin-left 0.3s ease;
+}
