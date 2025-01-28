@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/Dashboard.css"; // Make sure this path is correct
+import Lightbox from "../components/lightBox";
 
 const Dashboard = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const cards = [
     { title: "Total Users", value: 1200, icon: "group", image: "/Hanime/1.jpg" },
     { title: "Active Sessions", value: 350, icon: "session", image: "/Hanime/2.jpg" },
@@ -47,6 +50,15 @@ const Dashboard = () => {
     { title: "New Messages", value: 42, icon: "message", image: "/Hanime/41.jpg" },
   ];
 
+  const openLightbox = (index) => {
+    setIsOpen(true);
+    setCurrentIndex(index);
+  };
+
+  const closeLightbox = () => {
+    setIsOpen(false);
+  };
+
   return (
     <div className="dashboard-container">
       <h2 className="dashboard-header">Dashboard</h2>
@@ -54,13 +66,25 @@ const Dashboard = () => {
         {cards.map((card, index) => (
           <div key={index} className="card">
             <div className="card-body">
-              <img src={card.image} alt={card.title} className="card-image" />
+              <img
+                src={card.image}
+                alt={card.title}
+                className="card-image"
+                onClick={() => openLightbox(index)} // Open lightbox on image click
+              />
               <h3>{card.title}</h3>
               <p>{card.value}</p>
             </div>
           </div>
         ))}
       </div>
+      {isOpen && (
+        <Lightbox
+          images={cards.map((card) => card.image)} // Pass image URLs to Lightbox
+          currentIndex={currentIndex}
+          onClose={closeLightbox} // Close lightbox function
+        />
+      )}
     </div>
   );
 };

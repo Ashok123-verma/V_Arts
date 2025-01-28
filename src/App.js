@@ -45,12 +45,14 @@ function App() {
   return (
     <div className={theme}>
       <Router>
-        {/* Navbar is always visible */}
-        <Navbar
-          authenticated={authenticated}
-          toggleTheme={toggleTheme}
-          handleLogout={handleLogout}
-        />
+        {/* Render Navbar only on non-login pages */}
+        {window.location.pathname !== "/login" && (
+          <Navbar
+            authenticated={authenticated}
+            toggleTheme={toggleTheme}
+            handleLogout={handleLogout}
+          />
+        )}
 
         {/* Sidebar is visible only for logged-in users */}
         {authenticated && <Sidebar />}
@@ -100,7 +102,7 @@ function App() {
               )
             }
           />
-          <Route path="/dashboard" element={<Dashboard/>} />
+          <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
       </Router>
     </div>

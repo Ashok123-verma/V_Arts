@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import '../styles/Sidebar.css';
+import Lightbox from "../components/lightBox"; // Assuming Lightbox is a reusable component
 
 const Sidebar = () => {
   const [collapsed, setCollapsed] = useState(true);
   const [openDropdown, setOpenDropdown] = useState(null);
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false); // For managing the lightbox state
+  const [currentImage, setCurrentImage] = useState(null); // To store the image being clicked
 
   // Toggle Sidebar Collapse
   const toggleSidebar = () => {
@@ -14,6 +17,17 @@ const Sidebar = () => {
   // Toggle Dropdown Menu
   const toggleDropdownMenu = (index) => {
     setOpenDropdown(openDropdown === index ? null : index);
+  };
+
+  // Open the lightbox with the image clicked
+  const openLightbox = (imageUrl) => {
+    setCurrentImage(imageUrl);
+    setIsLightboxOpen(true);
+  };
+
+  // Close the lightbox
+  const closeLightbox = () => {
+    setIsLightboxOpen(false);
   };
 
   return (
@@ -26,7 +40,7 @@ const Sidebar = () => {
       <aside className={`sidebar ${collapsed ? 'collapsed' : ''}`}>
         {/* Sidebar Header */}
         <header className="sidebar-header">
-          <a href="#" className="header-logo">
+          <a href="#" className="header-logo" onClick={() => openLightbox("/images/Icon.jpg")}>
             <img src="/images/Icon.jpg" alt="CodingNepal" />
           </a>
           <button className="sidebar-toggler" onClick={toggleSidebar}>
@@ -74,49 +88,11 @@ const Sidebar = () => {
               </ul>
             </li>
 
-            {/* Dropdown 2 */}
-            <li className="nav-item">
-              <a
-                href="#"
-                className="nav-link dropdown-toggle"
-                onClick={() => toggleDropdownMenu(1)}
-              >
-                <span className="material-symbols-rounded">star</span>
-                <span className="nav-label">Bookmarks</span>
-                <span className="material-symbols-rounded">keyboard_arrow_down</span>
-              </a>
-              <ul className={`dropdown-menu ${openDropdown === 1 ? 'open' : ''}`}>
-                <li className="nav-item">
-                  <Link to="/bookmarks/saved-tutorials" className="nav-link"> {/* Redirect to saved tutorials */}
-                    Saved Tutorials
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/bookmarks/favorite-blogs" className="nav-link"> {/* Redirect to favorite blogs */}
-                    Favorite Blogs
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link to="/bookmarks/resource-guides" className="nav-link"> {/* Redirect to resource guides */}
-                    Resource Guides
-                  </Link>
-                </li>
-              </ul>
-            </li>
-
-            {/* Notifications */}
+            {/* Other Links */}
             <li className="nav-item">
               <Link to="/notifications" className="nav-link"> {/* Redirect to notifications page */}
                 <span className="material-symbols-rounded">notifications</span>
                 <span className="nav-label">Notifications</span>
-              </Link>
-            </li>
-
-            {/* Settings */}
-            <li className="nav-item">
-              <Link to="/settings" className="nav-link"> {/* Redirect to settings page */}
-                <span className="material-symbols-rounded">settings</span>
-                <span className="nav-label">Settings</span>
               </Link>
             </li>
 
@@ -130,6 +106,15 @@ const Sidebar = () => {
           </ul>
         </nav>
       </aside>
+
+      {/* Lightbox Modal */}
+      {isLightboxOpen && (
+        <Lightbox
+          images={[currentImage]} // Only one image in the lightbox at a time
+          currentIndex={0}
+          onClose={closeLightbox} // Function to close the lightbox
+        />
+      )}
     </div>
   );
 };

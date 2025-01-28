@@ -47,10 +47,6 @@ function Auth({ setAuthenticated }) {
               />
               <i>Password</i>
             </div>
-            <div className="links">
-              <a href="#">Forgot Password</a>
-              <a href="#">Signup</a>
-            </div>
             <div className="inputBox">
               <input
                 type="submit"
